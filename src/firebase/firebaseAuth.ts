@@ -1,6 +1,6 @@
 
 import { app } from './firebaseconfig';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification, Auth } from "firebase/auth";
 
 export const auth = getAuth(app);
 
@@ -40,11 +40,13 @@ export function loginWithEmailPassword(email: string, password: string) {
 }
 
 
-export function SignOutFunc(auth: any) {
+export function SignOutFunc(auth: Auth) {
     signOut(auth).then(() => {
         // Sign-out successful.
     }).catch((error) => {
         // An error happened.
+        console.log(error);
+        
     });
 }
 

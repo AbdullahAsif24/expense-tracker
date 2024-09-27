@@ -27,7 +27,7 @@ export async function saveUser(user: UserType) {
     //   await addDoc(collectionRef, user);
 
     try {
-        let docRef = doc(db, "users", user.uid);
+        const docRef = doc(db, "users", user.uid);
         await setDoc(docRef, user);
     } catch (e) {
         console.log(e);

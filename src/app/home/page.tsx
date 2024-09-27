@@ -26,7 +26,7 @@ export default function LoggedIn() {
         const formattedName = namePart
             ?.replace(/[\._]/g, " ")
             ?.split(" ")
-            ?.map((word: any) => word.charAt(0).toUpperCase() + word.slice(1))
+            ?.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             ?.join(" ");
         return formattedName;
     }
@@ -44,7 +44,7 @@ export default function LoggedIn() {
                 const q = query(collectionRef, condition);
 
                 const unsubscribeSnapshot = onSnapshot(q, (querySnapshot) => {
-                    let newExpenses: DocumentData[] = [];
+                    const newExpenses: DocumentData[] = [];
                     querySnapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
                             const expense = change.doc.data();
@@ -92,7 +92,8 @@ export default function LoggedIn() {
         deleteExpense(id)
     }
 
-    function handleEdit(expense: any) {
+
+    function handleEdit(expense: DocumentData) {
         setEditing(true)
         setEditingExpenseId(expense.id)
         setTitle(expense.title)
