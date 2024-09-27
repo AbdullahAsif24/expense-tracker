@@ -3,12 +3,9 @@ import {
     collection,
     deleteDoc,
     doc,
-    getDocs,
     getFirestore,
-    query,
     setDoc,
     updateDoc,
-    where,
 } from "firebase/firestore";
 import { auth } from "./firebaseAuth";
 import { app } from "./firebaseconfig";
@@ -37,22 +34,22 @@ export async function saveUser(user: UserType) {
     }
 }
 
-type saveExpenseType = {
+export type ExpenseType = {
     title: string,
-    price: Number|null|undefined,
+    price: number|null|undefined,
     category: string,
     date: Date,
     note: string
 }
 
-export async function saveExpense({ title, price, category, date, note }: saveExpenseType) {
+export async function saveExpense({ title, price, category, date, note }: ExpenseType) {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            let uid = user.uid; // Now we have the uid after authentication
-            let newExpense = { uid, title, price, category, date, note };
+            const uid = user.uid; // Now we have the uid after authentication
+            const newExpense = { uid, title, price, category, date, note };
 
             try {
-                let collectionRef = collection(db, "expenses");
+                const collectionRef = collection(db, "expenses");
                 await addDoc(collectionRef, newExpense);
             } catch (error) {
                 console.log(error);
@@ -94,11 +91,11 @@ export async function deleteExpense(id: string){
     await deleteDoc(doc(db, "expenses", id));
 }
 
-export async function updateExpense(expenseId: string, { title, price, category, date, note }: saveExpenseType) {
+export async function updateExpense(expenseId: string, { title, price, category, date, note }: ExpenseType) {
     const expenseRef = doc(db, "expenses", expenseId); // Reference to the specific expense document
 
     try {
-        let editedExpense = { title, price, category, date, note };
+        const editedExpense = { title, price, category, date, note };
         await updateDoc(expenseRef, editedExpense); // Update the document
         console.log("Expense updated successfully");
     } catch (error) {

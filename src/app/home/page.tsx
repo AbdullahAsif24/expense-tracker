@@ -31,28 +31,28 @@ export default function LoggedIn() {
         return formattedName;
     }
 
-    let name = extractNameFromEmail(user?.email);
+    const name = extractNameFromEmail(user?.email);
 
     // Real-time fetching of expenses
     const [allExpenses, setAllExpenses] = useState<DocumentData[]>([]);
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                let currentUserUID = user.uid;
-                let collectionRef = collection(db, "expenses");
-                let condition = where("uid", "==", currentUserUID);
-                let q = query(collectionRef, condition);
+                const currentUserUID = user.uid;
+                const collectionRef = collection(db, "expenses");
+                const condition = where("uid", "==", currentUserUID);
+                const q = query(collectionRef, condition);
 
                 const unsubscribeSnapshot = onSnapshot(q, (querySnapshot) => {
                     let newExpenses: DocumentData[] = [];
                     querySnapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
-                            let expense = change.doc.data();
+                            const expense = change.doc.data();
                             expense.id = change.doc.id;
                             newExpenses.push(expense);
                         }
                         if (change.type === "modified") {
-                            let expense = change.doc.data();
+                            const expense = change.doc.data();
                             expense.id = change.doc.id;
                             setAllExpenses(prevExpenses =>
                                 prevExpenses.map(prevExpense =>
@@ -176,11 +176,11 @@ export default function LoggedIn() {
                 <button
                     onClick={() => {
                         if (!editing) {
-                            let date = new Date();
+                            const date = new Date();
                             saveExpense({ title, price, category, date, note });
                             clearAllInput()
                         } else {
-                            let date = new Date();
+                            const date = new Date();
                             updateExpense(editingExpenseId, { title, price, category, date, note });
                             setEditing(false);
                             setEditingExpenseId('');

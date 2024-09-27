@@ -1,10 +1,8 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { EmailVerificationFunc, signupWithEmailPassword } from '../firebase/firebaseAuth'
+import { signupWithEmailPassword } from '../firebase/firebaseAuth'
 import { useState } from "react";
-import { saveUser } from '@/firebase/firebaseFirestore';
-import { useAuthContext } from '@/context/auth.context';
 
 
 export default function SignUp() {

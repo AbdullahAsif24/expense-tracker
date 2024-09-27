@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EmailVerificationFunc, loginWithEmailPassword } from '../firebase/firebaseAuth';
+import {  loginWithEmailPassword } from '../firebase/firebaseAuth';
 import { useRouter } from "next/navigation";
 
 
