@@ -134,7 +134,7 @@ export default function LoggedIn() {
                         type="number"
                         id="price"
                         placeholder="Enter price"
-                        value={price ? price : 123}
+                        value={`${price}`}
                         onChange={(e) => setPrice(Number(e.target.value))}
                         className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
